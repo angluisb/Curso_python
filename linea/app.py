@@ -1,8 +1,6 @@
+from funciones import calcular_y
 
 
-#Calculo de coordenadas de lineas.
-def calcular_y(x,m,b):
-    return m*x +b
 
 def main():
     m=2
