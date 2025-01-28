@@ -1,6 +1,6 @@
-from funciones import calcular_y
+from funciones import calcular_y, graficar
 import argparse
-
+import matplotlib.pyplot as plt
 
 def main(m,b):
     #X=[ x for x in range(1,11)]
@@ -13,6 +13,8 @@ def main(m,b):
     coordenadas_flotantes = list(zip(XF,YF))
     print("Flotantes:")
     print(coordenadas_flotantes)
+    
+    graficar(XF,YF,m,b)
     
 
 if __name__ == '__main__':
