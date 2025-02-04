@@ -37,18 +37,46 @@ def user(simbolos: dict):
         else:
             print('Numero Incorrecto')
     
-    def juego(simbolos:dict):
-        lista_combinaciones=[
-            ['1','2','3'],
-            ['4','5','6'],
-            ['7','8','9'],
-            ['1','4','7'],
-            ['2','5','8'],
-            ['3','6','9'],
-            ['1','5','9'],
-            ['3','5','7']
-        ]
+def juego(simbolos:dict):
+    lista_combinaciones=[
+        ['1','2','3'],
+        ['4','5','6'],
+        ['7','8','9'],
+        ['1','4','7'],
+        ['2','5','8'],
+        ['3','6','9'],
+        ['1','5','9'],
+        ['3','5','7']
+    ]
+    en_juego = True
+    
+    ganador = ""
+    mov=0
+    while en_juego:
         
+        if mov <9:
+            dibuja_tablero(simbolos=simbolos)
+            user(simbolos=simbolos)
+            dibuja_tablero(simbolos)
+            mov +=1 
+            gana = checa_winner(simbolos=simbolos, combinaciones=lista_combinaciones)
+            if gana is True:
+                en_juego = False
+                ganador = "Usuario/a"
+            ia(simbolos=simbolos)
+            dibuja_tablero(simbolos=simbolos)
+            mov +=1
+            gana = checa_winner(simbolos=simbolos, combinaciones=lista_combinaciones)
+            if gana is True:
+                en_juego=False
+                ganador ="Computadora"
+            if mov >=9:
+                en_juego = False
+        else:
+            
+            break
+
+
     def checa_winner(simbolos:dict, combinaciones:list):
         for c in combinaciones:
             if simbolos[c[0]] == simbolos [c[1]] == simbolos [c[2]]:
@@ -58,12 +86,4 @@ def user(simbolos: dict):
 if __name__ == '__main__':
     numeros=[str(x) for x in range(1,10)]
     simbolos = {x:x for x in numeros}
-    x = random.choice(numeros)
-    numeros.remove(x)
-    simbolos[x] = 'X'
-    dibuja_tablero(simbolos)
-    ia(simbolos)
-    dibuja_tablero(simbolos)
-    user(simbolos)
-    dibuja_tablero(simbolos)
-
+    juego(simbolos=simbolos)
