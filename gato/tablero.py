@@ -74,6 +74,7 @@ def juego(simbolos:dict):
             continue
         if movimientos >=9:
             en_juego = False
+            print("Empate1")
             continue
     return gana
 
@@ -91,6 +92,7 @@ if __name__ == '__main__':
         g=juego(simbolos)
         if g is not None:
             print(f"El ganador es {g}")
+        
         '''
         x = random.choice(numeros)
         numeros.remove(x)
