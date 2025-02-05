@@ -1,44 +1,46 @@
-"""
+'''
 tablero.py: Dibuja el tablero del juego de el gato
-"""
+'''
 import random
 
-def dibuja_tablero(simbolos):
-    print(f"""
+def dibuja_tablero(simbolos:dict):
+    print(f'''
         {simbolos['1']} | {simbolos['2']} | {simbolos['3']}
-        ---------
+        ----------
         {simbolos['4']} | {simbolos['5']} | {simbolos['6']}
-        ---------
+        ----------
         {simbolos['7']} | {simbolos['8']} | {simbolos['9']}
-        """)
-    
-    
+        ----------
+        ''' )
+
 
 def ia(simbolos:dict):
+    '''Juega la maquina'''
     ocupado = True
-    while ocupado is True:
-        x= random.choice(list(simbolos.keys()))
+    while ocupado == True:
+        x = random.choice(list(simbolos.keys()))
         if simbolos[x] not in ['X','O']:
-            simbolos[x]='O'
-            ocupado==False
-    
+            simbolos[x] = 'O'
+            ocupado = False
 
-def user(simbolos: dict):
+
+def usuario(simbolos:dict):
+    '''Juega el usuario'''
+    numeros = [str(i) for i in range(1,10)]
     ocupado = True
-    nums = [str(i) for i in range(1,10)]
-    while ocupado is True:
-        x = input('Ingresa la Casilla')
+    while ocupado == True:
+        x = input('Ingresa el numero de la casilla: ')
         if (x in numeros):
             if simbolos[x] not in ['X','O']:
-                simbolos[x] ='X'
+                simbolos[x] = 'X'
                 ocupado = False
             else:
-                print('Casilla Ocupada')
-        else:
-            print('Numero Incorrecto')
-    
+                print('Casilla ocupada')    
+        else: print('Valor invalido, ingresa un  numero del 1 al 9')    
+
 def juego(simbolos:dict):
-    lista_combinaciones=[
+    '''juego de gato'''
+    lista_combinaciones = [
         ['1','2','3'],
         ['4','5','6'],
         ['7','8','9'],
@@ -49,41 +51,53 @@ def juego(simbolos:dict):
         ['3','5','7']
     ]
     en_juego = True
-    
     ganador = ""
-    mov=0
+    movimientos = 0
+    dibuja_tablero(simbolos)
     while en_juego:
-        
-        if mov <9:
-            dibuja_tablero(simbolos=simbolos)
-            user(simbolos=simbolos)
-            dibuja_tablero(simbolos)
-            mov +=1 
-            gana = checa_winner(simbolos=simbolos, combinaciones=lista_combinaciones)
-            if gana is True:
-                en_juego = False
-                ganador = "Usuario/a"
-            ia(simbolos=simbolos)
-            dibuja_tablero(simbolos=simbolos)
-            mov +=1
-            gana = checa_winner(simbolos=simbolos, combinaciones=lista_combinaciones)
-            if gana is True:
-                en_juego=False
-                ganador ="Computadora"
-            if mov >=9:
-                en_juego = False
-        else:
-            
-            break
+        usuario(simbolos)
+        dibuja_tablero(simbolos)
+        movimientos += 1
+        gana = checa_winner(simbolos,lista_combinaciones)
+        if gana is not None:
+            en_juego = False
+            continue
+        if movimientos >= 9:
+            en_juego = False
+            continue
+        ia(simbolos)
+        dibuja_tablero(simbolos)
+        movimientos += 1
+        gana = checa_winner(simbolos,lista_combinaciones)
+        if gana is not None:
+            en_juego = False
+            continue
+        if movimientos >=9:
+            en_juego = False
+            continue
+    return gana
 
 
-    def checa_winner(simbolos:dict, combinaciones:list):
-        for c in combinaciones:
-            if simbolos[c[0]] == simbolos [c[1]] == simbolos [c[2]]:
-                return simbolos[0]
-        return None
-
+def checa_winner(simbolos:dict, combinaciones:list):
+    '''Checa si hay un ganador'''
+    for c in combinaciones:
+        if simbolos[c[0]] == simbolos[c[1]] == simbolos[c[2]]:
+            return simbolos[c[0]]
+        return None  
+    
 if __name__ == '__main__':
-    numeros=[str(x) for x in range(1,10)]
-    simbolos = {x:x for x in numeros}
-    juego(simbolos=simbolos)
+        numeros = [str(x) for x in range(1,10) ]
+        simbolos = {x:x for x in numeros}
+        g=juego(simbolos)
+        if g is not None:
+            print(f"El ganador es {g}")
+        '''
+        x = random.choice(numeros)
+        numeros.remove(x)
+        simbolos[x] = 'X'
+        dibuja_tablero(simbolos)
+        o = random.choice(numeros)
+        numeros.remove(o)
+        simbolos[o] = 'O'
+        dibuja_tablero(simbolos)
+        print(numeros)'''
