@@ -3,7 +3,7 @@ funciones auxiliares del juego Ahorcado
 '''
 import string
 import unicodedata
-from random import choice
+from random import *
 
 def carga_archivo_texto(archivo:str)->list:
     '''

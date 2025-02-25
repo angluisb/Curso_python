@@ -16,7 +16,33 @@ class Sport:
     
     
 if __name__ == "__main__":
+    s = Sport("Soccer", 11, "FIFA")
+    print(s)
+    print(repr(s))
+    print(s.to_json())
     nfl = Sport("Fotball", 11, "NFL")
-    print(nfl)
-    print(repr(nfl))
-    print(nfl.to_json)
+    lmp = Sport("Baseball",9, "LMP")
+    mlb = Sport("Baseball",9, "MLB")
+    
+    lista_deportes = [nfl,lmp,mlb]
+    archivo_deportes = "deportes.txt"
+    with open(archivo_deportes,"w") as file:
+        for d in lista_deportes:
+            file.write(repr(d)+"\n")
+        sport_list=[]
+        with open(archivo_deportes,"r") as file:
+            for line in file:
+                d = eval(line)
+                sport_list.append(d)
+        print(sport_list)
+        
+    import json
+    archivo_json = "deportes.json"
+    sports_json = [sport.to_json() for sport in sport_list]
+    with open(archivo_json,"w")as file:
+        json.dump(sports_json,file, indent=4)
+        
+    sport_list_json = []
+    with open(archivo_json, "r")as file:
+        sport_list_json = json.load(file)
+    print(sport_list_json)
