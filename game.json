@@ -1,1 +1,11 @@
-{'A': {'name': 'Dream Team', 'sport': {'name': 'Basketball', 'players': 5, 'league': 'NBA'}, 'players': [<bound method Athlete.to_json of Athlete('Jordan')>, <bound method Athlete.to_json of Athlete('curry')>, <bound method Athlete.to_json of Athlete('Pipen')>, <bound method Athlete.to_json of Athlete('Bird')>, <bound method Athlete.to_json of Athlete('Kobe')>]}, 'B': {'name': 'Czeck Rep.', 'sport': {'name': 'Basketball', 'players': 5, 'league': 'NBA'}, 'players': [<bound method Athlete.to_json of Athlete('Bjovik')>, <bound method Athlete.to_json of Athlete('Czack')>, <bound method Athlete.to_json of Athlete('Pfeizer')>, <bound method Athlete.to_json of Athlete('Leonard')>, <bound method Athlete.to_json of Athlete('Kempfe')>]}, 'score': {'Dream Team': 73, 'Czeck Rep.': 110}}
+[
+    {
+        "A": {
+            "name": "Mexico",
+            "sport": {
+                "name": "Soccer",
+                "players": 11,
+                "league": "FIFA"
+            },
+            "players": [
+                
