@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titulos</title>
+</head>
+<body>
+    <form action="/titulo" method="post" class="form-titulo">
+    <!-- The form is used to search for books by title. -->
+        <label for="titulo">Titulo:</label>
+        <input type="text" name="titulo" id="titulo">
+        <input type="submit" value="Buscar">
+    </form>
+    <ul>
+        {% for libro in lista_libros %}
+            <li><a href="/libro/{{libro.id}}">{{libro.title}}</a> - {{libro.author}}</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
